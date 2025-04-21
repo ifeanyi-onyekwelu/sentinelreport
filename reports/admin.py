@@ -31,11 +31,16 @@ class VictimInline(admin.TabularInline):
     extra = 1
 
 
+class EvidenceInline(admin.TabularInline):
+    model = Evidence
+    extra = 1
+
+
 class CaseAdmin(admin.ModelAdmin):
     list_display = ("id", "report", "status", "assigned_officer")
     list_filter = ("status", "assigned_officer")
     search_fields = ("report__location", "notes", "assigned_officer__username")
-    inlines = [SuspectInline, VictimInline]
+    inlines = [SuspectInline, VictimInline, EvidenceInline]
 
 
 class SuspectAdmin(admin.ModelAdmin):
@@ -50,7 +55,21 @@ class VictimAdmin(admin.ModelAdmin):
     search_fields = ("name",)
 
 
+class EvidenceAdmin(admin.ModelAdmin):
+    list_display = ("id", "case", "collected_at")
+    list_filter = ("case",)
+    search_fields = ("description",)
+
+
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ("id", "name")
+    list_filter = ("name",)
+    search_fields = ("name",)
+
+
 admin.site.register(CrimeReport, CrimeReportAdmin)
 admin.site.register(Case, CaseAdmin)
 admin.site.register(Suspect, SuspectAdmin)
 admin.site.register(Victim, VictimAdmin)
+admin.site.register(Evidence, EvidenceAdmin)
+admin.site.register(CrimeCategory, CategoryAdmin)

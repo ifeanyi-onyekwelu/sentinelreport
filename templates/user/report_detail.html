@@ -38,8 +38,9 @@
         </p>
         <div class="mt-3">
             <strong class="block text-gray-600 mb-1">Case Notes:</strong>
-            <p class="text-gray-800">{{ report.case.notes|default:"<span class='text-gray-500'>No notes
-                    available.</span>"|linebreaksbr }}</p>
+            <p class="text-gray-800">
+                {{ report.case.notes|default:"<span class='text-gray-500'>No notes available.</span>"|linebreaksbr }}
+            </p>
         </div>
 
         <div class="mt-4 border-t pt-4">
@@ -47,8 +48,8 @@
             {% if report.case.suspects.all %}
             <ul class="list-disc pl-5 text-gray-800">
                 {% for suspect in report.case.suspects.all %}
-                <li>{{ suspect.name }} - <span class="text-gray-600">{{ suspect.description|default:"No description
-                        provided." }}</span></li>
+                <li>{{ suspect.name }} - <span class="text-gray-600">
+                        {{ suspect.description|default:"No description provided." }}</span></li>
                 {% endfor %}
             </ul>
             {% else %}
@@ -74,8 +75,8 @@
             {% if report.case.evidence.all %}
             <ul class="list-disc pl-5 text-gray-800">
                 {% for evidence in report.case.evidence.all %}
-                <li>{{ evidence.description }} (<span class="text-gray-600">Collected at: {{
-                        evidence.collected_at|date:"F j, Y, g:i a" }}</span>)</li>
+                <li>{{ evidence.description }} (<span class="text-gray-600">Collected at:
+                        {{ evidence.collected_at|date:"F j, Y, g:i a" }}</span>)</li>
                 {% endfor %}
             </ul>
             {% else %}
